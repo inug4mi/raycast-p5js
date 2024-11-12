@@ -31,15 +31,6 @@ function setup() {
     lines.push(line4);
     lines.push(line5);
     lines.push(line6);
-    // intersections
-    //for (let i = 0; i < lines.length; i++){
-    //    for (j = 0; j < lines.length; j++){
-    //        if (i != j){
-    //            intersection = intersectionPointBetween(lines[i].x0, lines[i].y0, lines[i].x1, lines[i].y1, lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1);
-    //            points.push(intersection);
-    //        }
-    //    }
-    //}
 }
 
 function draw() {
@@ -53,7 +44,7 @@ function draw() {
     // create ray from mouse pos
     rays = [];
     for (let i = 0; i < 360; i+=5){
-        rayi = new Line(mouseX, mouseY, mouseX + Math.cos(i*2)*10000, mouseY + Math.sin(i*2)*10000);
+        rayi = new Line(mouseX, mouseY, mouseX + Math.cos(i*2)*100, mouseY + Math.sin(i*2)*100);
         rays.push(rayi);
     }
 
@@ -75,7 +66,7 @@ function draw() {
 
     // draw intersections
     for (let i = 0; i < points.length; i++){
-        ellipse(points[i][0], points[i][1],10,10);
+        ellipse(points[i][0], points[i][1],5,5);
     }
 }
 
