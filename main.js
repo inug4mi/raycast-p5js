@@ -14,7 +14,8 @@ class Line{
 
 let lines = [];
 let intersection;
-let points = [];
+let rays;
+let points;
 
 function setup() {
     createCanvas(500, 500);
@@ -49,11 +50,27 @@ function draw() {
         lines[i].drawLine();
     }
 
-    // display ray from mouse pos
+    // create ray from mouse pos
+    rays = [];
     for (let i = 0; i < 360; i+=5){
+        rayi = new Line(mouseX, mouseY, mouseX + Math.cos(i*2)*10000, mouseY + Math.sin(i*2)*10000);
+        rays.push(rayi);
+    }
+
+    // draw ray from mouse pos
+    for (let i = 0; i < rays.length; i++){
         strokeWeight(1);
         stroke(255,0,0);
-        line(mouseX, mouseY, mouseX + Math.cos(i*2)*10000, mouseY + Math.sin(i*2)*10000);
+        rays[i].drawLine();
+    }
+
+    // intersections from mouse to walls in lines variable
+    points = [];
+    for (let i = 0; i < rays.length; i++){
+        for (j = 0; j < lines.length; j++){
+            intersection = intersectionPointBetween(rays[i].x0, rays[i].y0, rays[i].x1, rays[i].y1, lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1);
+            points.push(intersection);
+        }
     }
 
     // draw intersections
