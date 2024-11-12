@@ -5,7 +5,7 @@ class Line{
         this.x1 = x1;
         this.y1 = y1;
     }
-    drawLine(weight=2, color=[0,0,255]){
+    drawLine(weight=3, color=[0,0,255]){
         strokeWeight(weight);
         stroke(color[0],color[1],color[2]);
         line(this.x0, this.y0, this.x1, this.y1);
@@ -31,14 +31,14 @@ function setup() {
     lines.push(line5);
     lines.push(line6);
     // intersections
-    for (let i = 0; i < lines.length; i++){
-        for (j = 0; j < lines.length; j++){
-            if (i != j){
-                intersection = intersectionPointBetween(lines[i].x0, lines[i].y0, lines[i].x1, lines[i].y1, lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1);
-                points.push(intersection);
-            }
-        }
-    }
+    //for (let i = 0; i < lines.length; i++){
+    //    for (j = 0; j < lines.length; j++){
+    //        if (i != j){
+    //            intersection = intersectionPointBetween(lines[i].x0, lines[i].y0, lines[i].x1, lines[i].y1, lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1);
+    //            points.push(intersection);
+    //        }
+    //    }
+    //}
 }
 
 function draw() {
@@ -47,6 +47,13 @@ function draw() {
     // draw lines
     for (let i = 0; i < lines.length; i++){
         lines[i].drawLine();
+    }
+
+    // display ray from mouse pos
+    for (let i = 0; i < 360; i+=5){
+        strokeWeight(1);
+        stroke(255,0,0);
+        line(mouseX, mouseY, mouseX + Math.cos(i*2)*10000, mouseY + Math.sin(i*2)*10000);
     }
 
     // draw intersections
